@@ -1,0 +1,35 @@
+<main>
+    <section>
+        <h2>PUBLICIDAD</h2>
+        <ul>
+            {{#each publicidad}}
+<li>{{this}}</li>
+        {{/each}}
+        </ul>
+    </section>
+
+<div>
+    <label for="nombre">USERNAME:</label>
+    <input type="text" placeholder="Write your name" maxlength="30" required>
+</div>
+
+  <form id="form-chat" >
+    <label for="mensaje">MENSAJE:</label>
+    <input id="mensaje" type="text" placeholder="Ingrese el mensaje" maxlength="500" autocomplete="off" required>
+    <button type="submit">ENVIAR</button>
+  </form>
+
+     <section id="chat" class="chat">
+    {{#each mensajes}}
+      <div class="msg">
+        <div class="msg-cabecera">
+          <strong>{{nombre}}</strong>
+          <span class="hora">{{hora}}</span>
+        </div>
+        <p>{{texto}}</p>
+      </div>
+    {{else}}
+      <p class="vacio" id="vacio">Aún no hay mensajes. ¡Escribe el primero!</p>
+    {{/each}}
+  </section>
+</main>
