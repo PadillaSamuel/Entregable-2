@@ -1,6 +1,7 @@
-import { log } from "console";
 import express from "express";
 import http from "http";
+import { Server } from "socket.io";
+import { engine } from "express-handlebars";
 
 const app = express();
 const server = http.createServer(app);
@@ -21,9 +22,9 @@ const messages = [];
 
 app.get("/", (req, res) => {
   res.render("home", {
-    titulo: "Chat en tiempo real",
-    publicidad,
-    mensajes,
+    titulo: "real-time chat",
+    publicity,
+    messages,
   });
 });
 
@@ -31,17 +32,17 @@ io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
   socket.on("chat:message", (data) => {
-    const nombre = String(data.nombre || "")
+    const name = String(data.name || "")
       .trim()
       .slice(0, 30);
-    const texto = String(data.texto || "")
+    const text = String(data.text || "")
       .trim()
       .slice(0, 500);
-    if (!nombre || !texto) return;
+    if (!name || !text) return;
     const message = {
-      nombre,
-      texto,
-      hora: new Date().toLocaleTimeString("es-CO", {
+      name,
+      text,
+      hour: new Date().toLocaleTimeString("es-CO", {
         hour: "2-digit",
         minute: "2-digit",
         timeZone: "America/Bogota",
@@ -51,8 +52,8 @@ io.on("connection", (socket) => {
     io.emit('chat:message', message)
   });
 
-  socket.on('disconnect', () => console.log('Usuario desconectado:', socket.id));
+  socket.on('disconnect', () => console.log('User desconnected:', socket.id));
 
 });
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));

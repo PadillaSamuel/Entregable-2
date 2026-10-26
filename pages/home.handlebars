@@ -19,17 +19,17 @@
     <button type="submit">ENVIAR</button>
   </form>
 
-     <section id="chat" class="chat">
+     <section id="chat">
     {{#each mensajes}}
-      <div class="msg">
-        <div class="msg-cabecera">
+      <div >
+        <div >
           <strong>{{nombre}}</strong>
-          <span class="hora">{{hora}}</span>
+          <span >{{hora}}</span>
         </div>
         <p>{{texto}}</p>
       </div>
     {{else}}
-      <p class="vacio" id="vacio">Aún no hay mensajes. ¡Escribe el primero!</p>
+      <p id="vacio">Aún no hay mensajes. ¡Escribe el primero!</p>
     {{/each}}
   </section>
 </main>
