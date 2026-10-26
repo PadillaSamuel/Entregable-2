@@ -18,12 +18,20 @@ const publicity = [
   "20% off English courses",
   "Visit the software fair this Friday",
 ];
+
+let cycles = 0;
+
+setInterval(() => {
+  cycles = (cycles + 1) % publicity.length;
+  io.emit("ads:update", publicity[cycles]);
+}, 3000);
+
 const messages = [];
 
 app.get("/", (req, res) => {
   res.render("home", {
     title: "real-time chat",
-    publicity,
+    publicity: publicity[cycles],
     messages,
   });
 });
@@ -48,12 +56,11 @@ io.on("connection", (socket) => {
         timeZone: "America/Bogota",
       }),
     };
-    messages.push(message); 
-    io.emit('chat:message', message)
+    messages.push(message);
+    io.emit("chat:message", message);
   });
 
-  socket.on('disconnect', () => console.log('User disconnected:', socket.id));
-
+  socket.on("disconnect", () => console.log("User disconnected:", socket.id));
 });
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));

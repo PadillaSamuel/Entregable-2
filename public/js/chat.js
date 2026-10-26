@@ -4,6 +4,11 @@ const form = document.getElementById("form-chat");
 const inputName = document.getElementById("name");
 const inputMessage = document.getElementById("message");
 const chat = document.getElementById("chat");
+const ad = document.getElementById("ad");
+
+socket.on("ads:update", (text) => {
+  ad.textContent = text;
+});
 
 try {
   inputName.value = localStorage.getItem("chat-name") || "";
