@@ -1,35 +1,35 @@
-<main>
-    <section>
-        <h2>PUBLICIDAD</h2>
-        <ul>
-            {{#each publicidad}}
-<li>{{this}}</li>
-        {{/each}}
-        </ul>
-    </section>
+<main class="chat-app">
+  <section class="ads">
+    <h2>ADS</h2>
+    <ul>
+      {{#each publicity}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </section>
 
-<div>
-    <label for="nombre">USERNAME:</label>
-    <input type="text" placeholder="Write your name" maxlength="30" required>
-</div>
+  <div class="user">
+    <label for="name">USERNAME:</label>
+    <input id="name" type="text" placeholder="Write your name" maxlength="30" autocomplete="off" required>
+  </div>
 
-  <form id="form-chat" >
-    <label for="mensaje">MENSAJE:</label>
-    <input id="mensaje" type="text" placeholder="Ingrese el mensaje" maxlength="500" autocomplete="off" required>
-    <button type="submit">ENVIAR</button>
+  <form id="form-chat" class="form-chat">
+    <label for="message">MESSAGE:</label>
+    <input id="message" type="text" placeholder="Write a message" maxlength="500" autocomplete="off" required>
+    <button type="submit" class="btn-send">SEND</button>
   </form>
 
-     <section id="chat">
-    {{#each mensajes}}
-      <div >
-        <div >
-          <strong>{{nombre}}</strong>
-          <span >{{hora}}</span>
+  <section id="chat" class="chat">
+    {{#each messages}}
+      <div class="msg">
+        <div class="msg-header">
+          <strong>{{name}}</strong>
+          <span class="hour">{{hour}}</span>
         </div>
-        <p>{{texto}}</p>
+        <p>{{text}}</p>
       </div>
     {{else}}
-      <p id="vacio">Aún no hay mensajes. ¡Escribe el primero!</p>
+      <p id="empty" class="empty">No messages yet. Write the first one!</p>
     {{/each}}
   </section>
 </main>

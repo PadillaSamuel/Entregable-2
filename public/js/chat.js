@@ -1,12 +1,12 @@
 const socket = io();
 
 const form = document.getElementById("form-chat");
-const inputName = document.getElementById("nombre");
-const inputMessage = document.getElementById("mensaje");
+const inputName = document.getElementById("name");
+const inputMessage = document.getElementById("message");
 const chat = document.getElementById("chat");
 
 try {
-  inputNombre.value = localStorage.getItem("chat-name") || "";
+  inputName.value = localStorage.getItem("chat-name") || "";
 } catch (e) {}
 
 form.addEventListener("submit", (e) => {
@@ -15,7 +15,7 @@ form.addEventListener("submit", (e) => {
   const text = inputMessage.value.trim();
 
   if (!name) {
-    alert("Escribe tu nombre primero");
+    alert("Write your name first");
     inputName.focus();
     return;
   }
@@ -26,8 +26,8 @@ form.addEventListener("submit", (e) => {
   } catch (e) {}
 
   socket.emit("chat:message", { name, text });
-  inputMensaje.value = "";
-  inputMensaje.focus();
+  inputMessage.value = "";
+  inputMessage.focus();
 });
 
 socket.on("chat:message", (m) => {
@@ -38,19 +38,19 @@ socket.on("chat:message", (m) => {
   div.className = "msg";
   if (m.name === inputName.value.trim()) div.classList.add("own");
 
-  const cab = document.createElement("div");
-  cab.className = "msg-cabecera";
+  const header = document.createElement("div");
+  header.className = "msg-header";
   const who = document.createElement("strong");
-  who.textContent = m.name; 
-  const hora = document.createElement("span");
-  hora.className = "hora";
-  hora.textContent = m.hour;
-  cab.append(who, hour);
+  who.textContent = m.name;
+  const hour = document.createElement("span");
+  hour.className = "hour";
+  hour.textContent = m.hour;
+  header.append(who, hour);
 
   const p = document.createElement("p");
-  p.textContent = m.texto;
+  p.textContent = m.text;
 
-  div.append(cab, p);
+  div.append(header, p);
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 });

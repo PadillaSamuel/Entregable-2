@@ -14,15 +14,15 @@ app.set("views", "./pages");
 app.use(express.static("public"));
 
 const publicity = [
-  "¡Matrículas abiertas 2027!",
-  "Descuento del 20% en cursos de inglés",
-  "Visita la feria de software este viernes",
+  "2027 enrollment is open!",
+  "20% off English courses",
+  "Visit the software fair this Friday",
 ];
 const messages = [];
 
 app.get("/", (req, res) => {
   res.render("home", {
-    titulo: "real-time chat",
+    title: "real-time chat",
     publicity,
     messages,
   });
@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
     io.emit('chat:message', message)
   });
 
-  socket.on('disconnect', () => console.log('User desconnected:', socket.id));
+  socket.on('disconnect', () => console.log('User disconnected:', socket.id));
 
 });
 const PORT = process.env.PORT || 3000;
